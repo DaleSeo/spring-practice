@@ -3,6 +3,7 @@ package seo.dale.spring.rest.client;
 import java.net.URI;
 
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,9 @@ public class BypassService {
 	
 	public String bypass(String url, HttpMethod method, String requestBody) {    
 		URI uri = BypassService.buildUri(url);
-		HttpEntity<String> requestEntity = new HttpEntity<String>(requestBody);
+		HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Type", "application/json; charset=UTF-8");
+		HttpEntity<String> requestEntity = new HttpEntity<String>(requestBody, headers);
 		ResponseEntity<String> responseEntity = restTemplate.exchange(uri, method, requestEntity, String.class);
 		String responseBody = responseEntity.getBody();
 		return responseBody;
