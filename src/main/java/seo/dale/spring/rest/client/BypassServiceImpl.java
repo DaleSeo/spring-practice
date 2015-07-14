@@ -12,7 +12,7 @@ import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Service
-public class BypassService {
+public class BypassServiceImpl {
 
 	private static RestTemplate restTemplate;
 	
@@ -21,12 +21,12 @@ public class BypassService {
 	}
 	
 	public String bypass(String url, HttpMethod method, String requestBody) {    
-		URI uri = BypassService.buildUri(url);
+		URI uri = BypassServiceImpl.buildUri(url);
 		HttpHeaders headers = new HttpHeaders();
 	    headers.add("Content-Type", "application/json; charset=UTF-8");
 		HttpEntity<String> requestEntity = new HttpEntity<String>(requestBody, headers);
-		ResponseEntity<String> responseEntity = restTemplate.exchange(uri, method, requestEntity, String.class);
-		String responseBody = responseEntity.getBody();
+		ResponseEntity<byte[]> responseEntity = restTemplate.exchange(uri, method, requestEntity, byte[].class);
+		String responseBody = new String(responseEntity.getBody());
 		return responseBody;
 	}
 	

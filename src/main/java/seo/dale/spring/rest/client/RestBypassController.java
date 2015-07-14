@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RestBypassController {
 	
 	@Autowired
-	private BypassService srvc;
+	private BypassServiceImpl srvc;
 
 	@RequestMapping("/bypass")
 	public ResponseEntity<String> bypass(@RequestHeader("url") String url, HttpMethod method, @RequestBody(required=false) String requestBody) {
