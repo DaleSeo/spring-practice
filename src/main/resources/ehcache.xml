@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false">
+
+    <!--
+    maxElementsInMemory="1000"    // 메모리에 유지되는 최대 캐시 수
+    name="INTERFACE_CACHE"        // 캐시 이름
+    eternal="false"               // 캐시 항목 유지 true:캐시 만료 안됨, false:설정에 따라 만료됨
+    timeToIdleSeconds="120"       // 캐시가 마지막으로 사용된지 얼마 후에 소멸? default:0
+    timeToLiveSeconds="120"       // 캐시 만료 시간, default : 0 (영원히 안 지움)
+    overflowToDisk="true"         // 메모리가 꽉 찼을때 디스크에 저장 여부
+    diskSpoolBufferSizeMB="100"
+    maxElementsOnDisk="100000000"
+    diskPersistent="false"        // VM 종료 대비 캐시를 디스크에 저장(백업 개념)
+    diskExpiryThreadIntervalSeconds="120"    // 자바 GC랑 비슷한 역할, default:120초
+-->
+
+    <defaultCache
+            eternal="false"
+            maxElementsInMemory="1000"
+            overflowToDisk="false"
+            diskPersistent="false"
+            timeToIdleSeconds="0"
+            timeToLiveSeconds="0"
+            memoryStoreEvictionPolicy="LRU" />
+
+    <cache name="examples"
+           maxEntriesLocalHeap="10000"
+           maxEntriesLocalDisk="1000"
+           eternal="false"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300" timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+           transactionalMode="off">
+        <persistence strategy="localTempSwap"/>
+    </cache>
+
+</ehcache>
