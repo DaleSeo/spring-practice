@@ -3,7 +3,6 @@ package seo.dale.spring;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
-import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 import seo.dale.spring.rest.support.LoggingRequestInterceptor;
@@ -20,8 +19,7 @@ public class RestConfig {
 	public RestTemplate restTempalte() {
 		RestTemplate restTemplate = new RestTemplate();
 		restTemplate.setInterceptors(Arrays.asList(new LoggingRequestInterceptor()));
-		ClientHttpRequestFactory requestFactory = new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory());
-		restTemplate.setRequestFactory(requestFactory);
+		restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(new SimpleClientHttpRequestFactory()));
 		return restTemplate;
 	}
 
