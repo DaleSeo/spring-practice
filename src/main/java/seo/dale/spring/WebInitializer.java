@@ -29,7 +29,7 @@ public class WebInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webApplicationContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
-
+	    dispatcher.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // NoHandlerFoundException instead of 404 response
     }
     
 }
