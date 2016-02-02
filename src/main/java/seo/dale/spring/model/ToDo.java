@@ -35,4 +35,28 @@ public class ToDo extends BaseEntity {
         this.description = description;
     }
 
+    public static class Builder {
+
+        private ToDo built;
+
+        public Builder() {
+            built = new ToDo();
+        }
+
+        public ToDo build() {
+            return built;
+        }
+
+        public Builder title(String title) {
+            built.title = title;
+            return this;
+        }
+
+        public Builder description(String description) {
+            built.description = description;
+            return this;
+        }
+
+    }
+
 }
