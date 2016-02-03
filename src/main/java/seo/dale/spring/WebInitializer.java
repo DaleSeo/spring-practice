@@ -15,12 +15,12 @@ public class WebInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
 
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class, CacheConfig.class, PersistenceConfig.class);
+        rootContext.register(AppConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
-        webApplicationContext.register(WebConfig.class);
+        webApplicationContext.register(WebMvcConfig.class);
 
         DispatcherServlet dispatcherServlet =  new DispatcherServlet(webApplicationContext);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true); // Throw NoHandlerFoundException instead of 404 HTTP Status

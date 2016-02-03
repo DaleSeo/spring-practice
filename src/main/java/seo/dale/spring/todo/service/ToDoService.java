@@ -1,7 +1,7 @@
-package seo.dale.spring.service;
+package seo.dale.spring.todo.service;
 
-import seo.dale.spring.exception.ToDoNotFoundException;
-import seo.dale.spring.model.ToDo;
+import seo.dale.spring.todo.exception.ToDoNotFoundException;
+import seo.dale.spring.todo.model.ToDo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package seo.dale.spring.repository;
+package seo.dale.spring.todo.repository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import seo.dale.spring.PersistenceConfig;
-import seo.dale.spring.model.ToDo;
+import seo.dale.spring.todo.model.ToDo;
 
 import java.util.List;
 

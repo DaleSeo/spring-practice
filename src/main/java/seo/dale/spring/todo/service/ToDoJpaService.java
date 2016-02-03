@@ -1,17 +1,18 @@
-package seo.dale.spring.service;
+package seo.dale.spring.todo.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import seo.dale.spring.exception.ToDoNotFoundException;
-import seo.dale.spring.model.ToDo;
-import seo.dale.spring.repository.ToDoRepository;
+import seo.dale.spring.todo.exception.ToDoNotFoundException;
+import seo.dale.spring.todo.model.ToDo;
+import seo.dale.spring.todo.repository.ToDoRepository;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class ToDoJpaService implements ToDoService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ToDoJpaService.class);

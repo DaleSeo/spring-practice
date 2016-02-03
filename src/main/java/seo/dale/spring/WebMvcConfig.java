@@ -17,7 +17,7 @@ import java.util.List;
 @EnableWebMvc
 @Configuration
 @ComponentScan(useDefaultFilters = false, includeFilters = @ComponentScan.Filter({Controller.class, ControllerAdvice.class}))
-public class WebConfig extends WebMvcConfigurerAdapter {
+public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {

@@ -1,17 +1,25 @@
-package seo.dale.spring.model;
+package seo.dale.spring.todo.model;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+import seo.dale.spring.common.model.BaseEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
 @Entity
 public class ToDo extends BaseEntity {
 
-    @Column
+    private static final int MAX_LENGHTH_TITLE = 100;
+    private static final int MAX_LENGHTH_DESCRIPTION = 500;
+
+    @NotEmpty
+    @Length(max = MAX_LENGHTH_TITLE)
+    @Column(length = MAX_LENGHTH_TITLE)
     private String title;
 
-    @Column
+    @Length(max = MAX_LENGHTH_DESCRIPTION)
+    @Column(length = MAX_LENGHTH_DESCRIPTION)
     private String description;
 
     public void update(String title, String description) {

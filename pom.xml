@@ -121,6 +121,13 @@
 			<scope>provided</scope>
 		</dependency>
 
+		<!-- Validation -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>5.1.3.Final</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>org.springframework</groupId>
