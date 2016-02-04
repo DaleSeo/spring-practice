@@ -47,17 +47,13 @@ public class ToDo extends BaseEntity {
 
         private ToDo built;
 
-        public Builder() {
+        public Builder(String title) {
             built = new ToDo();
+            built.title = title;
         }
 
         public ToDo build() {
             return built;
-        }
-
-        public Builder title(String title) {
-            built.title = title;
-            return this;
         }
 
         public Builder description(String description) {

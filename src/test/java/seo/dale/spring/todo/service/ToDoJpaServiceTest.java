@@ -23,7 +23,7 @@ public class ToDoJpaServiceTest {
 
     @Test
     public void testAdd() throws Exception {
-        ToDo toDo = new ToDo.Builder().title("title 1").description("description 1").build();
+        ToDo toDo = new ToDo.Builder("title 1").description("description 1").build();
 
         when(repository.save(toDo)).thenReturn(toDo);
 
