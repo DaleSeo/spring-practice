@@ -7,6 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -23,9 +24,11 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreatedDate
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdDate;
 
     @LastModifiedDate
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastModifiedDate;
 
     public Long getId() {

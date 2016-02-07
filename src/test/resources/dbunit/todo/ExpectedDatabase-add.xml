@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <ToDo id="1" title="Foo" description="Lorem ipsum"/>
+    <ToDo id="2" title="Bar" description="Lorem ipsum"/>
+    <ToDo id="3" title="title3" description="description3"/>
+</dataset>
