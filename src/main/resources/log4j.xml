@@ -18,7 +18,7 @@
     </appender>
 
     <!-- Application Loggers -->
-    <logger name="seo.dale.springs">
+    <logger name="seo.dale.spring">
         <level value="debug" />
     </logger>
 
