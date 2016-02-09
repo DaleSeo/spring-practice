@@ -39,9 +39,26 @@ public class ToDoController {
     @RequestMapping(method = RequestMethod.GET)
     public List<ToDo> findAll() {
         LOGGER.debug("Finding all to-do entries.");
-        List<ToDo> foundList = service.findAll();
-        LOGGER.debug("Found {} to-do entries.", foundList.size());
-        return foundList;
+        List<ToDo> listed = service.findAll();
+        LOGGER.debug("Found {} to-do entries.", listed.size());
+        return listed;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ToDo findById(@PathVariable("id") Long id) throws ToDoNotFoundException {
+        LOGGER.debug("Finding a to-do entry with id: {}", id);
+        ToDo found = service.findById(id);
+        LOGGER.debug("Found a to-do entry with information: {}", found);
+        return found;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public ToDo update(@RequestBody @Validated ToDo toUpdate, @PathVariable("id") Long id) throws ToDoNotFoundException {
+        LOGGER.debug("Updating a to-do entry with information: {}", toUpdate);
+        toUpdate.setId(id);
+        ToDo updated = service.update(toUpdate);
+        LOGGER.debug("Updated the information of a to-entry to: {}", updated);
+        return updated;
     }
 
 }
