@@ -52,4 +52,5 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
                 .simpleDateFormat("yyyy/MM/dd HH:mm:ss")
                 .build();
     }
+
 }
