@@ -10,7 +10,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-public class WebInitializer implements WebApplicationInitializer {
+public class WebAppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
@@ -19,14 +19,17 @@ public class WebInitializer implements WebApplicationInitializer {
         servletContext.addListener(log4jListener);
 
         AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
-        rootContext.register(AppConfig.class, CacheConfig.class, DatabaseConfig.class);
+        rootContext.register(AppConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
 
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
-        webApplicationContext.register(WebConfig.class);
+        webApplicationContext.register(WebMvcConfig.class);
 
-        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher", new DispatcherServlet(webApplicationContext));
+        DispatcherServlet dispatcherServlet =  new DispatcherServlet(webApplicationContext);
+        dispatcherServlet.setThrowExceptionIfNoHandlerFound(true); // Throw NoHandlerFoundException instead of 404 HTTP Status
+
+        ServletRegistration.Dynamic dispatcher = servletContext.addServlet("dispatcher",dispatcherServlet);
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 	    dispatcher.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // NoHandlerFoundException instead of 404 response
