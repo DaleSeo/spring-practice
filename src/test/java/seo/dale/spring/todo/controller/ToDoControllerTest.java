@@ -39,7 +39,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
         DbUnitTestExecutionListener.class})
 @DatabaseSetup("/dbunit/todo/DatabaseSetup.xml")
 @TestPropertySource("classpath:application.test.properties")
-@Transactional
 public class ToDoControllerTest {
 
     private MockMvc mockMvc;
