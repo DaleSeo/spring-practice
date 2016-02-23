@@ -1,10 +1,10 @@
-package org.dale.spring.rest.client;
-
-import static org.junit.Assert.fail;
+package dale.dale.spring.rest.client;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.web.client.RestTemplate;
+
+import static org.junit.Assert.fail;
 
 public class RestTemplateTest {
 	
