@@ -3,6 +3,7 @@ package seo.dale.spring.core.event;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -18,17 +19,18 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataLoader.class);
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
+    public void onApplicationEvent(ContextRefreshedEvent event) {
+        ApplicationContext applicationContext = event.getApplicationContext();
+        if (applicationContext.getParent() != null) {
+            return;
+        }
+
         LOGGER.debug("loading data onto the database.");
 
-        ToDo toDo1 = new ToDo();
-        toDo1.setTitle("Listen to the EBS radio show.");
-        toDo1.setDescription("Aired at 7 AM and 5 PM");
+        ToDo toDo1 = new ToDo.Builder("EBS radio").description("Aired at 7 AM and 5 PM.").build();
         repository.save(toDo1);
 
-        ToDo toDo2 = new ToDo();
-        toDo2.setTitle("Watch the Arirang news");
-        toDo2.setDescription("Every morning");
+        ToDo toDo2 = new ToDo.Builder("Arirang news").description("Watch every morning.").build();
         repository.save(toDo2);
     }
 

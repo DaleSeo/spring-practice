@@ -1,5 +1,6 @@
 package seo.dale.spring.common.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -24,10 +25,12 @@ public abstract class BaseEntity {
     private Long id;
 
     @CreatedDate
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdDate;
 
     @LastModifiedDate
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date lastModifiedDate;
 
