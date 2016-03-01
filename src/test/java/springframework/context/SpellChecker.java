@@ -1,4 +1,4 @@
-package org.springframework.context;
+package springframework.context;
 
 import java.util.ArrayList;
 import java.util.List;

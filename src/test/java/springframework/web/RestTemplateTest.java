@@ -1,4 +1,4 @@
-package dale.springframework.web.client;
+package springframework.web;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

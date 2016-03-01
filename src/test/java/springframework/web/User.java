@@ -1,4 +1,4 @@
-package dale.springframework.web.client;
+package springframework.web;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

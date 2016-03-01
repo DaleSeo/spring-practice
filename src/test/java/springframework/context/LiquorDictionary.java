@@ -1,4 +1,4 @@
-package org.springframework.context;
+package springframework.context;
 
 import java.util.Arrays;
 import java.util.List;

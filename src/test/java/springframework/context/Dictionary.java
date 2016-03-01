@@ -1,4 +1,4 @@
-package org.springframework.context;
+package springframework.context;
 
 public interface Dictionary {
 
