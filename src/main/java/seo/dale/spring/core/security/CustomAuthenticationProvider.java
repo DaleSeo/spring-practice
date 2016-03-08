@@ -42,6 +42,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 			}
 		} catch (AuthenticationException e) {
 			logger.info(e.toString());
+			throw e;
 		} return user;
 	}
 
