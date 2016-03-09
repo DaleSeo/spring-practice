@@ -4,7 +4,8 @@
 # Doing
 
 # To Do
-
+- http://zgundam.tistory.com/46 실습
+- SP Admin의 accessDecisionManager 분석
 
 # Done
 - Custom Logout

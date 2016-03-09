@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<sec:authorize access="!isAuthenticated()">
+<sec:authorize access="isAnonymous()">
     <c:url value="/login" var="loginUrl"/>
     <form action="${loginUrl}" method="post">
         <c:if test="${param.error != null}">
