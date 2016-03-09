@@ -4,9 +4,10 @@
 # Doing
 
 # To Do
-- Custom Logout
+
 
 # Done
+- Custom Logout
 - Custom Login
 - CustomAuthenticationProvider 까지 이용해서 Manager에 여러개의 Provider를 사용하는 방법
 - config와 configGlobal의 차이

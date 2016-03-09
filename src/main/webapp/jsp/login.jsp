@@ -9,31 +9,44 @@
 </head>
 <body>
 
-<c:url value="/login" var="loginUrl"/>
-<form action="${loginUrl}" method="post">
-    <c:if test="${param.error != null}">
+<sec:authorize access="!isAuthenticated()">
+    <c:url value="/login" var="loginUrl"/>
+    <form action="${loginUrl}" method="post">
+        <c:if test="${param.error != null}">
+            <p>
+                Invalid username and password.
+            </p>
+        </c:if>
+        <c:if test="${param.logout != null}">
+            <p>
+                You have been logged out.
+            </p>
+        </c:if>
         <p>
-            Invalid username and password.
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
         </p>
-    </c:if>
-    <c:if test="${param.logout != null}">
         <p>
-            You have been logged out.
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
         </p>
-    </c:if>
-    <p>
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username"/>
-    </p>
-    <p>
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password"/>
-    </p>
-    <input type="hidden"
-           name="${_csrf.parameterName}"
-           value="${_csrf.token}"/>
-    <button type="submit" class="btn">Log in</button>
-</form>
+        <sec:csrfInput />
+        <button type="submit" class="btn">Log in</button>
+    </form>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+    <ul>
+        <li>Username : <sec:authentication property="principal.username" /></li>
+        <li>Password : <sec:authentication property="principal.password" /></li>
+        <li>Authorities : <sec:authentication property="principal.authorities" /></li>
+    </ul>
+    <c:url value="/logout" var="logoutUrl"/>
+    <form action="${logoutUrl}" method="post">
+        <sec:csrfInput />
+        <input type="submit" value="Logout"/>
+    </form>
+</sec:authorize>
 
 </body>
 </html>

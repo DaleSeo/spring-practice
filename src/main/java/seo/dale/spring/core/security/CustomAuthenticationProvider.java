@@ -34,7 +34,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	}
 
 	private User loadUser(String username, String password) {
-		User user = null;
+		User user;
 		try {
 			user = userService.loadUserByUsername(username);
 			if (!password.equals(user.getPassword())) {
@@ -43,7 +43,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 		} catch (AuthenticationException e) {
 			logger.info(e.toString());
 			throw e;
-		} return user;
+		}
+		return user;
 	}
 
 	@Override
