@@ -1,13 +1,12 @@
 # dale-spring
 > A example project to teach myself how to make use of Spring.
 
-# Doing
-
 # To Do
-- http://zgundam.tistory.com/46 실습
+- http://zgundam.tistory.com/48 실습
 - SP Admin의 accessDecisionManager 분석
 
 # Done
+- Custom Message
 - Custom Logout
 - Custom Login
 - CustomAuthenticationProvider 까지 이용해서 Manager에 여러개의 Provider를 사용하는 방법

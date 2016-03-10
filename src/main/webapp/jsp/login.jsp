@@ -15,6 +15,8 @@
         <c:if test="${param.error != null}">
             <p>
                 Invalid username and password.
+                <br/>
+                (${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message})
             </p>
         </c:if>
         <c:if test="${param.logout != null}">
