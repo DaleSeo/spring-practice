@@ -2,7 +2,7 @@
 > A example project to teach myself how to make use of Spring.
 
 # To Do
-- http://zgundam.tistory.com/48 실습
+- http://zgundam.tistory.com/51
 - SP Admin의 accessDecisionManager 분석
 
 # Done
