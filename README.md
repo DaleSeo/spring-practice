@@ -2,10 +2,13 @@
 > A example project to teach myself how to make use of Spring.
 
 # To Do
-- http://zgundam.tistory.com/51
+- User Controller
+- Role Repository/Service
+- http://zgundam.tistory.com/52
 - SP Admin의 accessDecisionManager 분석
 
 # Done
+- User Repository/Service
 - Custom Message
 - Custom Logout
 - Custom Login

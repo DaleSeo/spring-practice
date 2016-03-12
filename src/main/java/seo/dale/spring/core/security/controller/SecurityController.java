@@ -3,7 +3,7 @@ package seo.dale.spring.core.security.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import seo.dale.spring.core.security.model.User;
+import seo.dale.spring.user.model.User;
 
 /**
  * @author Dale Seo

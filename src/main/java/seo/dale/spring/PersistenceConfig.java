@@ -24,7 +24,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("seo.dale.spring.todo.repository")
+@EnableJpaRepositories("seo.dale.spring")
 @EnableJpaAuditing
 @PropertySource("classpath:application.properties")
 public class PersistenceConfig {
@@ -35,7 +35,7 @@ public class PersistenceConfig {
     private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
-    private static final String PROPERTY_PACKAGES_TO_SCAN = "seo.dale.spring.todo.model";
+    private static final String PROPERTY_PACKAGES_TO_SCAN = "seo.dale.spring";
 
     @Autowired
     private Environment environment;

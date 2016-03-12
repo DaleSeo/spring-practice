@@ -4,7 +4,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import seo.dale.spring.core.security.model.Role;
-import seo.dale.spring.core.security.model.User;
+import seo.dale.spring.user.model.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
