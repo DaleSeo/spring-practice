@@ -2,8 +2,9 @@
 > A example project to teach myself how to make use of Spring.
 
 # To Do
-- User Controller
+- AuthenticationSuccessHandler, AuthenticationFailureHandler
 - Role Repository/Service
+- User Controller
 - http://zgundam.tistory.com/52
 - SP Admin의 accessDecisionManager 분석
 
