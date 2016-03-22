@@ -1,6 +1,9 @@
 package seo.dale.spring.user.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import seo.dale.spring.core.exception.DataNotFoundException;
@@ -11,10 +14,19 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User found = repository.findByUsername(username);
+		if (found == null) {
+			throw new UsernameNotFoundException("Can't find the username");
+		}
+		return found;
+	}
 
     public List<User> findAll() {
         return repository.findAll();

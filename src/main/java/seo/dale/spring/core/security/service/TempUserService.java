@@ -2,7 +2,6 @@ package seo.dale.spring.core.security.service;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 import seo.dale.spring.core.security.model.Role;
 import seo.dale.spring.user.model.User;
 
@@ -13,8 +12,8 @@ import java.util.Map;
 /**
  * @author Dale Seo
  */
-@Service
-public class UserService implements UserDetailsService {
+// @Service
+public class TempUserService implements UserDetailsService {
 
 	private static Map<String, User> table;
 

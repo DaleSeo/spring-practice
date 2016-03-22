@@ -9,6 +9,7 @@
 - SP Admin의 accessDecisionManager 분석
 
 # Done
+- Use JPA UserSerivce
 - User Repository/Service
 - Custom Message
 - Custom Logout

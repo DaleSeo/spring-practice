@@ -8,9 +8,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
-import seo.dale.spring.user.model.User;
-import seo.dale.spring.core.security.service.UserService;
 
 /**
  * @author Dale Seo
@@ -21,30 +21,30 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
 	@Autowired
-	private UserService userService;
+	private UserDetailsService userDetailsService;
 
 	@Override
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 		String username = authentication.getName();
 		String password = (String) authentication.getCredentials();
 
-		User user = loadUser(username, password);
+		UserDetails user = loadUser(username, password);
 
 		return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
 	}
 
-	private User loadUser(String username, String password) {
-		User user;
+	private UserDetails loadUser(String username, String password) {
+		UserDetails userDetails;
 		try {
-			user = userService.loadUserByUsername(username);
-			if (!password.equals(user.getPassword())) {
+			userDetails = userDetailsService.loadUserByUsername(username);
+			if (!password.equals(userDetails.getPassword())) {
 				throw new BadCredentialsException("The password doesn't match.");
 			}
 		} catch (AuthenticationException e) {
 			logger.info(e.toString());
 			throw e;
 		}
-		return user;
+		return userDetails;
 	}
 
 	@Override
