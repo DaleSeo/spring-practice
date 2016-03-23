@@ -24,6 +24,8 @@ public class User extends BaseEntity implements UserDetails {
 	private String lastName;
 	private String email;
 
+	private int loginAttemptCount;
+
 	@Transient
 	private List<Role> authorities;
 
@@ -104,6 +106,14 @@ public class User extends BaseEntity implements UserDetails {
 		this.email = email;
 	}
 
+	public int getLoginAttemptCount() {
+		return loginAttemptCount;
+	}
+
+	public void setLoginAttemptCount(int loginAttemptCount) {
+		this.loginAttemptCount = loginAttemptCount;
+	}
+
 	public static class Builder {
 
 		private User built;
@@ -112,6 +122,7 @@ public class User extends BaseEntity implements UserDetails {
 			built = new User();
 			built.username = username;
 			built.password = password;
+			built.loginAttemptCount = 0;
 		}
 
 		public User build() {

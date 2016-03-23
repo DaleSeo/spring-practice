@@ -32,7 +32,7 @@ import static org.hibernate.validator.internal.util.Contracts.assertNotNull;
 @DatabaseSetup("/dbunit/user/DatabaseSetup.xml")
 public class UserServiceTest {
 
-    private UserService service = new UserService();
+    private UserServiceImpl service = new UserServiceImpl();
 
     @Autowired
     private UserRepository repository;

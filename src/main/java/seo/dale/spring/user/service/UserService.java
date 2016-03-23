@@ -1,63 +1,28 @@
 package seo.dale.spring.user.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import seo.dale.spring.core.exception.DataNotFoundException;
 import seo.dale.spring.user.model.User;
-import seo.dale.spring.user.repository.UserRepository;
 
 import java.util.List;
 
-@Service
-@Transactional(readOnly = true)
-public class UserService implements UserDetailsService {
+/**
+ * @author 서대영/Store기술개발팀/SKP
+ */
+public interface UserService {
 
-    @Autowired
-    private UserRepository repository;
+	List<User> findAll();
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User found = repository.findByUsername(username);
-		if (found == null) {
-			throw new UsernameNotFoundException("Can't find the username");
-		}
-		return found;
-	}
+	User create(User user);
 
-    public List<User> findAll() {
-        return repository.findAll();
-    }
+	User findById(Long id) throws DataNotFoundException;
 
-    @Transactional
-    public User create(User user) {
-        return repository.save(user);
-    }
+	User removeById(Long id) throws DataNotFoundException;
 
-    @Transactional(readOnly = false, rollbackFor = DataNotFoundException.class)
-    public User findById(Long id) throws DataNotFoundException {
-        User found = repository.findOne(id);
-        if (found == null) {
-            throw new DataNotFoundException("No user found with id " + id);
-        }
-        return found;
-    }
+	User modify(User user) throws DataNotFoundException;
 
-    @Transactional(rollbackFor = DataNotFoundException.class)
-    public User removeById(Long id) throws DataNotFoundException {
-        User found = findById(id);
-        repository.delete(found);
-        return found;
-    }
+	void increaseLoginAttemptCount(String username) throws UsernameNotFoundException;
 
-    @Transactional(rollbackFor = DataNotFoundException.class)
-    public User modify(User user) {
-        User found = findById(user.getId());
-        found.update(user);
-        return found;
-    }
+	void resetLoginAttemptCount(String username) throws UsernameNotFoundException;
 
 }
