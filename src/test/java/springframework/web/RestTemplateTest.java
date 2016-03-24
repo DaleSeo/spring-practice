@@ -22,17 +22,14 @@ public class RestTemplateTest {
 		restTemplate = new RestTemplate();
 		List<HttpMessageConverter<?>> converters = restTemplate.getMessageConverters();
 		System.out.println("### Message Converters ###");
-		for(HttpMessageConverter<?> each : converters) {
-			System.out.println(each);
-		}
+		converters.forEach(System.out::println);
 		
 		ResponseErrorHandler errorHandelr = restTemplate.getErrorHandler();
 		System.out.println("### Response Error Handler ###");
 		System.out.println(errorHandelr);
 
-		DefaultUriTemplateHandler uriTemplateHandler = new DefaultUriTemplateHandler();
+		DefaultUriTemplateHandler uriTemplateHandler = (DefaultUriTemplateHandler) restTemplate.getUriTemplateHandler();
 		uriTemplateHandler.setBaseUrl(BASE_URL);
-		restTemplate.setUriTemplateHandler(uriTemplateHandler);
 		System.out.println("### Uri Template Handler ###");
 		System.out.println(uriTemplateHandler);
 
@@ -42,11 +39,12 @@ public class RestTemplateTest {
 		restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(simpleClientHttpRequestFactory));
 		System.out.println("### ClientHttpRequestFactory ###");
 		System.out.println(simpleClientHttpRequestFactory);
+
 	}
 	
 	@Test
 	public void getForObject() {
-		String res = restTemplate.getForObject("/users", String.class, 1);
+		String res = restTemplate.getForObject("/users", String.class);
 		System.out.println("# getForObject : " + res);
 	}
 	
