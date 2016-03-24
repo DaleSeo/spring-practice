@@ -31,13 +31,13 @@ public class LogInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
-        traceRequest(request, body);
+	    logRequest(request, body);
         ClientHttpResponse response = execution.execute(request, body);
-        traceResponse(response);
+        logResponse(response);
         return response;
     }
 
-    private void traceRequest(HttpRequest request, byte[] body) throws IOException {
+    private void logRequest(HttpRequest request, byte[] body) throws IOException {
         LOGGER.debug("=========================== REQUEST INFO ===========================");
         LOGGER.debug("URI : " + request.getURI());
         LOGGER.debug("Method : " + request.getMethod());
@@ -48,7 +48,7 @@ public class LogInterceptor implements ClientHttpRequestInterceptor {
         LOGGER.debug("Request Body : " + new String(body, "UTF-8"));
     }
 
-    private void traceResponse(ClientHttpResponse response) throws IOException {
+    private void logResponse(ClientHttpResponse response) throws IOException {
         String responseBody = IOUtils.toString(new InputStreamReader(response.getBody(), "UTF-8"));
         LOGGER.debug("=========================== RESPONSE INFO ===========================");
         LOGGER.debug("Status code: " + response.getStatusCode());

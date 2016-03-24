@@ -5,8 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.BufferingClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.DefaultUriTemplateHandler;
 import seo.dale.spring.web.client.interceptor.LogInterceptor;
+import seo.dale.spring.web.client.url.CustomUriTemplateHandler;
 
 import java.util.Arrays;
 
@@ -26,18 +26,12 @@ public class RestTemplateAdapter {
 
 		restTemplate.setInterceptors(Arrays.asList(new LogInterceptor()));
 
-		DefaultUriTemplateHandler uriTemplateHandler = new DefaultUriTemplateHandler();
-		uriTemplateHandler.setBaseUrl(BASE_URL);
-		restTemplate.setUriTemplateHandler(uriTemplateHandler);
-		System.out.println("### Uri Template Handler ###");
-		System.out.println(uriTemplateHandler);
+		restTemplate.setUriTemplateHandler(new CustomUriTemplateHandler());
 
 		SimpleClientHttpRequestFactory simpleClientHttpRequestFactory = new SimpleClientHttpRequestFactory();
 		simpleClientHttpRequestFactory.setConnectTimeout(30000);
 		simpleClientHttpRequestFactory.setReadTimeout(2000);
 		restTemplate.setRequestFactory(new BufferingClientHttpRequestFactory(simpleClientHttpRequestFactory));
-		System.out.println("### ClientHttpRequestFactory ###");
-		System.out.println(simpleClientHttpRequestFactory);
 	}
 
 	public <T> ResponseEntity<T> exchange(RequestEntity<?> requestEntity, Class<T> responseType) {
@@ -47,4 +41,5 @@ public class RestTemplateAdapter {
 	public <T> T getForObject(String url, Class<T> responseType, Object... urlVariables) {
 		return restTemplate.getForObject(url, responseType, urlVariables);
 	}
+
 }
