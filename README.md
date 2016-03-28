@@ -1,15 +1,18 @@
 # dale-spring
 > A example project to teach myself how to make use of Spring.
 
+# Doing
+- CustomAuthenticationFailureHandler 설정 시 /login?error 로 redirect 됐다가 튕기는 현상
+
 # To Do
 - LoginAttemptCount
-- AuthenticationSuccessHandler, AuthenticationFailureHandler
 - Role Repository/Service
 - User Controller
 - http://zgundam.tistory.com/52
 - SP Admin의 accessDecisionManager 분석
 
 # Done
+- AuthenticationSuccessHandler, AuthenticationFailureHandler
 - UserController
 - Use JPA UserSerivce
 - User Repository/Service

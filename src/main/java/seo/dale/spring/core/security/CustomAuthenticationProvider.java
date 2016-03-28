@@ -10,12 +10,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Dale Seo
  */
-@Component
+@Service
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
 	private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);

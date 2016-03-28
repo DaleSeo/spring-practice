@@ -6,6 +6,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import seo.dale.spring.core.security.CustomAuthenticationProvider;
+import seo.dale.spring.core.security.handler.CustomAuthenticationFailureHandler;
+import seo.dale.spring.core.security.handler.CustomAuthenticationSuccessHandler;
 
 @EnableWebSecurity(debug = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -24,16 +26,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+	    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler = new CustomAuthenticationSuccessHandler();
+	    CustomAuthenticationFailureHandler customAuthenticationFailureHandler = new CustomAuthenticationFailureHandler();
+
         http
                 .authorizeRequests()
-	                .antMatchers("/resources/**", "/").permitAll()
+		            .antMatchers("/login?error").permitAll()
+		            .antMatchers("/resources/**", "/").permitAll()
 	                .antMatchers("/admin/**").hasRole("ADMIN")
 	                .antMatchers("/toDo", "/toDo/**").access("hasRole('USER') or hasRole('DBA')")
 	                .anyRequest().authenticated()
 	                .and()
                 .formLogin()
-		            .loginPage("/login")
+		        .loginPage("/login")
 		            .permitAll()
+		            .successHandler(customAuthenticationSuccessHandler)
+		        .failureHandler(customAuthenticationFailureHandler)
 		            .and()
                 .httpBasic();
     }
