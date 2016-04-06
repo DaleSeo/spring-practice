@@ -1,4 +1,4 @@
-package org.springframework.aop;
+package seo.dale.spring.aop.xml;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;

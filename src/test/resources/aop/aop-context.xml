@@ -5,9 +5,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-       <bean class="org.springframework.aop.AbcPrinter"/>
+       <bean class="seo.dale.spring.aop.xml.AbcPrinter"/>
 
-       <bean id="loggingAspect" class="org.springframework.aop.LoggingAspect">
+       <bean id="loggingAspect" class="seo.dale.spring.aop.xml.LoggingAspect">
               <constructor-arg name="stream" value="#{T(System).out}"/>
        </bean>
 

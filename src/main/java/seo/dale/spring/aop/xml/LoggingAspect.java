@@ -1,4 +1,4 @@
-package org.springframework.aop;
+package seo.dale.spring.aop.xml;
 
 import java.io.PrintStream;
 

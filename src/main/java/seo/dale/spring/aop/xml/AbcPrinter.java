@@ -1,4 +1,4 @@
-package org.springframework.aop;
+package seo.dale.spring.aop.xml;
 
 public class AbcPrinter {
 
