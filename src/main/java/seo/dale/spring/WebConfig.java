@@ -22,7 +22,7 @@ import java.util.List;
 @EnableWebMvc
 @Configuration
 @ComponentScan(useDefaultFilters = false, includeFilters = @ComponentScan.Filter({Controller.class, ControllerAdvice.class}))
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
