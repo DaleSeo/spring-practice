@@ -29,7 +29,7 @@ public class SpellCheckerTest {
 
     @Test
     public void testWithXmlConfig() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("/context/spellCheckerContext.xml");
+        ApplicationContext context = new ClassPathXmlApplicationContext("context/spellCheckerContext.xml");
         SpellChecker checker = context.getBean(SpellChecker.class);
         List<Integer> indices = checker.checkDocument(Arrays.asList("Beer", "Soju", "Wine", "Makkolli", "Whiskey"));
         assertEquals(Arrays.asList(1, 3), indices);
