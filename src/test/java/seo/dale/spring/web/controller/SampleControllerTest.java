@@ -41,7 +41,7 @@ public class SampleControllerTest {
     }
 
     @Test
-    public void testFind() throws Exception {
+    public void testList() throws Exception {
         int count = 5;
 
         List<Sample> expected = createSampleList(count);

@@ -1,10 +1,7 @@
 package seo.dale.spring.web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import seo.dale.spring.sample.domain.Sample;
 import seo.dale.spring.sample.service.SampleService;
 
@@ -22,8 +19,13 @@ public class SampleController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public List<Sample> find(@RequestParam int count) {
+    public List<Sample> list(@RequestParam(defaultValue = "5") int count) {
         return service.find(count);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Sample detail(@PathVariable long id) {
+        return service.findById(id);
     }
 
 }

@@ -7,4 +7,7 @@ import java.util.List;
 public interface SampleService {
 
     List<Sample> find(int count);
+
+    Sample findById(long id);
+
 }
