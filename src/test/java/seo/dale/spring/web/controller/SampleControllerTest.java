@@ -16,8 +16,10 @@ import java.util.Date;
 import java.util.List;
 
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -30,14 +32,14 @@ public class SampleControllerTest {
     private SampleController controller;
 
     @Mock
-    private SampleService mockSvc;
+    private SampleService mockService;
 
     @Before
     public void setUp() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         List<Sample> expected = createSampleList(5);
-        when(mockSvc.find(5)).thenReturn(expected);
+        when(mockService.find(5)).thenReturn(expected);
     }
 
     @Test
@@ -45,13 +47,40 @@ public class SampleControllerTest {
         int count = 5;
 
         List<Sample> expected = createSampleList(count);
-        when(mockSvc.find(count)).thenReturn(expected);
+        when(mockService.find(count)).thenReturn(expected);
 
         mockMvc.perform(get("/samples?count=" + count))
                 .andDo(print())
                 .andExpect(status().isOk());
 
-        verify(mockSvc).find(count);
+        verify(mockService).find(count);
+    }
+
+    @Test
+    public void testDetail() throws Exception {
+        Sample expected = new Sample(1, "name_1", "hohoho", new Date());
+        when(mockService.findById(1)).thenReturn(expected);
+
+        mockMvc.perform(get("/samples/1"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        verify(mockService).findById(1);
+    }
+
+    @Test
+    public void testSave() throws Exception {
+        Sample toSave = new Sample("name_1", "hohoho");
+        Sample saved = new Sample(1, "name_1", "hohoho", new Date());
+        when(mockService.save(toSave)).thenReturn(saved);
+
+        mockMvc.perform(post("/samples")
+                        //.param("name", "name_1")
+                        .param("description", "hohoho"))
+                .andDo(print())
+                .andExpect(status().isOk());
+
+        verify(mockService).save(toSave);
     }
 
     private List<Sample> createSampleList(int count) {

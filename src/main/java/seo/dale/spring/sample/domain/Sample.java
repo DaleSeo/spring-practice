@@ -1,11 +1,17 @@
 package seo.dale.spring.sample.domain;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Date;
 
 public class Sample {
 
     private long id;
 
+    @NotEmpty
     private String name;
 
     private String description;
@@ -13,6 +19,12 @@ public class Sample {
     private Date date;
 
     public Sample() {
+    }
+
+    public Sample(String name, String description) {
+        this.name = name;
+        this.description = description;
+        this.date = new Date();
     }
 
     public Sample(long id, String name, String description, Date date) {
@@ -54,4 +66,18 @@ public class Sample {
         this.date = date;
     }
 
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this, "id", "date");
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return EqualsBuilder.reflectionEquals(this, obj, "id", "date");
+    }
+
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }

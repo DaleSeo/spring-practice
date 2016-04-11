@@ -10,4 +10,6 @@ public interface SampleService {
 
     Sample findById(long id);
 
+    Sample save(Sample sample);
+
 }
