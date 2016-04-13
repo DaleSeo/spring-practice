@@ -1,6 +1,9 @@
 package seo.dale.spring;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
@@ -23,8 +26,14 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration){
         registration.setInitParameter("throwExceptionIfNoHandlerFound","true");
+        registration.setLoadOnStartup(1);
+        registration.setMultipartConfig(new MultipartConfigElement("D:/temp", 1024*1024*5, 1024*1024*5*5, 1024*1024)); // 5M, 25M, 1M
     }
 
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new DelegatingFilterProxy("loggingFilter")};
+    }
 }
 
 /*public class WebAppInitializer implements WebApplicationInitializer {
