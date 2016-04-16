@@ -14,19 +14,10 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository repository;
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User found = repository.findByUsername(username);
-		if (found == null) {
-			throw new UsernameNotFoundException("Can't find the username");
-		}
-		return found;
-	}
 
     public List<User> findAll() {
         return repository.findAll();
@@ -44,6 +35,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User found = repository.findOne(id);
         if (found == null) {
             throw new DataNotFoundException("No user found with id " + id);
+        }
+        return found;
+    }
+
+    @Override
+    public User findByUsername(String username) throws DataNotFoundException {
+        User found = repository.findByUsername(username);
+        if (found == null) {
+            throw new DataNotFoundException("No user found with the username" + username);
         }
         return found;
     }

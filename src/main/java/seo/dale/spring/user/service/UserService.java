@@ -17,6 +17,8 @@ public interface UserService {
 
 	User findById(Long id) throws DataNotFoundException;
 
+	User findByUsername(String username) throws DataNotFoundException;
+
 	User removeById(Long id) throws DataNotFoundException;
 
 	User modify(User user) throws DataNotFoundException;
