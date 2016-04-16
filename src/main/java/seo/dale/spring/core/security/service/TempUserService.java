@@ -1,9 +1,9 @@
 package seo.dale.spring.core.security.service;
 
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import seo.dale.spring.core.security.model.Role;
-import seo.dale.spring.user.model.User;
 
 import java.util.Arrays;
 import java.util.HashMap;
