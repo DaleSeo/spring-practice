@@ -2,6 +2,7 @@ package seo.dale.spring.cache;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
@@ -11,6 +12,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 @Component
+@CacheConfig(cacheNames = "examples")
 public class ExampleCacheService {
 
     public static final Logger LOGGER = LoggerFactory.getLogger(ExampleCacheService.class);
@@ -29,7 +31,7 @@ public class ExampleCacheService {
     }
 
     // 캐시 조회를 원하는 메서드에는 @Cacheable 어노테이션 사용
-    @Cacheable(CACHE_NAME)
+    @Cacheable
     public String find(int key) {
         LOGGER.debug("# Didn't hit the cache.");
         simulateSlowService();
@@ -50,17 +52,17 @@ public class ExampleCacheService {
     }
 
     // 캐시 초기화를 원하는 메서드에는 @CacheEvict 어노테이션 사용
-    @CacheEvict(CACHE_NAME)
+    @CacheEvict
     public void remove(int key) {
         dummyMap.remove(key);
     }
 
-    @CacheEvict(CACHE_NAME)
+    @CacheEvict
     public void update(int key, String dummy) {
         dummyMap.put(key, dummy);
     }
 
-    @CacheEvict(value = CACHE_NAME, allEntries = true)
+    @CacheEvict(allEntries = true)
     public void removeAll() {
     }
 
