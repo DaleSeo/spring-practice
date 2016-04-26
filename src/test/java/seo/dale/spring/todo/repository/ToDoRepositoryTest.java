@@ -74,7 +74,7 @@ public class ToDoRepositoryTest {
 
         System.out.println("# SELECT ALL");
         List<ToDo> list1 = repository.findAll(); // SELECT SQL
-        assertEquals(1, list1.size());
+        assertEquals(3, list1.size());
 
         System.out.println("# UPDATE");
         added.setTitle("Title 1-1"); // UPDATE SQL

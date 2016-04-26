@@ -3,12 +3,15 @@ package seo.dale.spring;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
@@ -21,7 +24,7 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories("seo.dale.spring.todo.repository")
+@EnableJpaRepositories("seo.dale.spring")
 @EnableJpaAuditing
 @PropertySource("classpath:application.properties")
 public class PersistenceConfig {
@@ -32,7 +35,7 @@ public class PersistenceConfig {
     private static final String PROPERTY_NAME_HIBERNATE_NAMING_STRATEGY = "hibernate.ejb.naming_strategy";
     private static final String PROPERTY_NAME_HIBERNATE_SHOW_SQL = "hibernate.show_sql";
 
-    private static final String PROPERTY_PACKAGES_TO_SCAN = "seo.dale.spring.todo.model";
+    private static final String PROPERTY_PACKAGES_TO_SCAN = "seo.dale.spring";
 
     @Autowired
     private Environment environment;
@@ -64,6 +67,15 @@ public class PersistenceConfig {
         entityManagerFactoryBean.setJpaProperties(jpaProperties);
 
         return entityManagerFactoryBean;
+    }
+
+    @Bean
+    @DependsOn("entityManagerFactory")
+    public ResourceDatabasePopulator initDatabase(DataSource dataSource) throws Exception {
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("sql/toDo.sql"));
+        populator.populate(dataSource.getConnection());
+        return populator;
     }
 
     @Bean
