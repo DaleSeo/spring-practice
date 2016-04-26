@@ -1,9 +1,9 @@
 package seo.dale.spring;
 
+import net.sf.ehcache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.Cache;
-import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean;
 import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
@@ -26,14 +26,14 @@ public class CacheConfig {
 
     @Bean
     @Profile({"default", "local"})
-    public CacheManager concurrentMapCacheManager() {
+    public ConcurrentMapCacheManager concurrentMapCacheManager() {
         log.debug("concurrentMapCacheManager");
         return new ConcurrentMapCacheManager("examples");
     }
 
     @Bean
     @Profile("dev")
-    public CacheManager simpleCacheManager(){
+    public SimpleCacheManager simpleCacheManager(){
         log.debug("simpleCacheManager");
         SimpleCacheManager cacheManager = new SimpleCacheManager();
         List<Cache> caches = new ArrayList<>();
@@ -52,17 +52,17 @@ public class CacheConfig {
 
     @Bean
     @Profile("prod")
-    public CacheManager ehCacheCacheManager() {
+    public EhCacheCacheManager ehCacheCacheManager(CacheManager chacheManager) {
         log.debug("ehCacheCacheManager");
-        return new EhCacheCacheManager(ehCacheManagerFactoryBean().getObject());
+        return new EhCacheCacheManager(chacheManager);
     }
 
     @Bean
     @Profile("prod")
     public EhCacheManagerFactoryBean ehCacheManagerFactoryBean() {
-        EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
-        cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
-        return cmfb;
+        EhCacheManagerFactoryBean ehCacheManagerFactoryBean = new EhCacheManagerFactoryBean();
+        ehCacheManagerFactoryBean.setConfigLocation(new ClassPathResource("ehcache.xml"));
+        return ehCacheManagerFactoryBean;
     }
 
 }

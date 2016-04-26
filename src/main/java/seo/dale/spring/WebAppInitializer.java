@@ -1,19 +1,50 @@
 package seo.dale.spring;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import org.springframework.web.WebApplicationInitializer;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.servlet.DispatcherServlet;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
+import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
-public class WebAppInitializer implements WebApplicationInitializer {
+public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    @Override
+    protected Class<?>[] getRootConfigClasses() {
+        return new Class<?>[]{AppConfig.class};
+    }
+
+    @Override
+    protected Class<?>[] getServletConfigClasses() {
+        return new Class<?>[]{WebConfig.class};
+    }
+
+    @Override
+    protected String[] getServletMappings() {
+        return new String[]{"/"};
+    }
+
+    @Override
+    protected void customizeRegistration(ServletRegistration.Dynamic registration){
+        registration.setInitParameter("throwExceptionIfNoHandlerFound","true");
+        registration.setLoadOnStartup(1);
+        registration.setMultipartConfig(new MultipartConfigElement("D:/temp", 1024*1024*5, 1024*1024*5*5, 1024*1024)); // 5M, 25M, 1M
+    }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new DelegatingFilterProxy("loggingFilter")};
+    }
+}
+
+/*public class WebAppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-	    AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        servletContext.setInitParameter("log4jConfiguration", "/log4j.xml");
+        Log4jConfigListener log4jListener = new Log4jConfigListener();
+        servletContext.addListener(log4jListener);
+
+        AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.register(AppConfig.class);
 
         servletContext.addListener(new ContextLoaderListener(rootContext));
@@ -30,4 +61,4 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	    dispatcher.setInitParameter("throwExceptionIfNoHandlerFound", "true"); // NoHandlerFoundException instead of 404 response
     }
     
-}
+}*/
