@@ -4,9 +4,9 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="dictionanry" class="org.springframework.context.LiquorDictionary" />
+    <bean id="dictionanry" class="springframework.context.LiquorDictionary" />
 
-    <bean class="org.springframework.context.SpellChecker">
+    <bean class="springframework.context.SpellChecker">
         <constructor-arg ref="dictionanry" />
     </bean>
 

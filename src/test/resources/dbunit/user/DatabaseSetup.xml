@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <User id="1" createdDate="2012-10-21 11:13:28" lastModifiedDate="2012-10-21 11:13:28" username="dale0713" password="yeji0818" firstName="Dale" lastName="Seo" email="dale.seo@gmail.com"/>
+    <User id="2" createdDate="2012-10-21 11:13:28" lastModifiedDate="2012-10-21 11:13:28" username="kimrla38" password="kate2637" firstName="Kate" lastName="Kim" email="kimral38@maver.com"/>
+    <User id="3" createdDate="2012-10-21 11:13:28" lastModifiedDate="2012-10-21 11:13:28" username="yeji818" password="dale0713" firstName="Yeji" lastName="Jeon" email="ourmart818@daum.net"/>
+</dataset>

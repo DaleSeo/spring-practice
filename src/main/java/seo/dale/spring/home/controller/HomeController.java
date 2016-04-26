@@ -11,6 +11,7 @@ public class HomeController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
+    @RequestMapping
     public String index() {
         LOGGER.debug("Rendering home page.");
         return "Welcome to Dale's Spring.";

@@ -12,7 +12,7 @@ import seo.dale.spring.todo.service.ToDoService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/toDo")
+@RequestMapping("/toDos")
 public class ToDoController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ToDoController.class);
