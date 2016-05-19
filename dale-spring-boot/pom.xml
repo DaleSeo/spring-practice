@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>seo.dale.spring.boot</groupId>
-	<artifactId>demo</artifactId>
+	<artifactId>dale-spring-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
