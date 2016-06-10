@@ -33,6 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
 		            .antMatchers("/login?error", "/login?logout").permitAll()
 		            .antMatchers("/resources/**", "/").permitAll()
+					.antMatchers("/string/**").permitAll()
 	                .antMatchers("/admin/**").hasRole("ADMIN")
 	                .antMatchers("/toDo", "/toDo/**").hasAnyRole("USER", "DBA")
 				.anyRequest().authenticated()
@@ -43,7 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		            .successHandler(customAuthenticationSuccessHandler)
 		        .failureHandler(customAuthenticationFailureHandler)
 		            .and()
-                .httpBasic();
+                .httpBasic()
+                    .and()
+                .csrf().disable();
     }
 
 }
