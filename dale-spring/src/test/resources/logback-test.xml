@@ -11,6 +11,8 @@
     <logger name="jdbc" level="WARN" />
     <logger name="jdbc.sqltiming" level="INFO" />
 
+    <logger name="seo.dale.spring" level="DEBUG" />
+
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
     </root>
