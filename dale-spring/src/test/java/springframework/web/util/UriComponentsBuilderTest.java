@@ -47,4 +47,19 @@ public class UriComponentsBuilderTest {
 		assertEquals("http://www.test.com:80/abc?q=%25EC%259A%25B0%25EB%25A6%25AC", uri.toString());
 		assertEquals("q=%EC%9A%B0%EB%A6%AC", uri.getQuery());
 	}
+
+	/**
+	 * # 기호는 fragment 구분자이므로 URL 인코딩 되지 않는다.
+	 * & 기호는 query 구분자이므로 URL 인코딩 되지 않는다.
+	 */
+	@Test
+	public void shouldNotEncodeDelimiters() {
+		String uriString = "/other/search/v1?q0=00&00&q1=#&q2=%";
+		UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(uriString);
+		UriComponents uriComponents = builder.build().expand().encode();
+		URI uri = uriComponents.toUri();
+		System.out.println(uri);
+		assertEquals("/other/search/v1?q0=00&00&q1=#&q2=%25", uri.toString());
+	}
+
 }
