@@ -12,7 +12,17 @@ import static org.junit.Assert.assertEquals;
  * UriComponents를 인코딩하지 않으면 세팅한 String을 그대로둔다. 
  */
 public class UriComponentsTest {
-	
+
+	@Test
+	public void extractComponent() {
+		UriComponents uriComponents = UriComponentsBuilder.fromHttpUrl("https://sub1.sub2.domain.co.kr:8080/path1/path2?q1=v1").build();
+		assertEquals("https", uriComponents.getScheme());
+		assertEquals("sub1.sub2.domain.co.kr", uriComponents.getHost());
+		assertEquals(8080, uriComponents.getPort());
+		assertEquals("/path1/path2", uriComponents.getPath());
+	}
+
+
 	@Test
 	public void testWithoutUriTempalte() {
 		System.out.println("# Before Encoding");
@@ -76,5 +86,5 @@ public class UriComponentsTest {
 		System.out.println("# uri : " + uri);
 		assertEquals("http://example.com/hotels/42/bookings/21", uri.toString());
 	}
-	
+
 }
